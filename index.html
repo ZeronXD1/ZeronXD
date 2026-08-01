@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to ZerenXD WEB</title>
+    <!-- Normal Clean Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ================= RED NEON THEME (NORMAL FONTS) ================= */
+        :root {
+            --red-main: #ff003c;
+            --red-glow: rgba(255, 0, 60, 0.45);
+            --bg-black: #08080c;
+            --card-glass: rgba(18, 18, 25, 0.85);
+            --border-color: rgba(255, 0, 60, 0.35);
+            --text-color: #f5f5f7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--text-color);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Red Background Particles */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Header Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 7%;
+            background: rgba(12, 12, 18, 0.95);
+            border-bottom: 2px solid var(--red-main);
+            box-shadow: 0 4px 20px rgba(255, 0, 60, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+        }
+
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Direct logo.jpg Image Styling */
+        .brand-logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--red-main);
+            box-shadow: 0 0 12px var(--red-main);
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        .brand-name {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-name span {
+            color: var(--red-main);
+        }
+
+        .social-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 9px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.88rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+        }
+
+        .btn-yt {
+            background: #d90000;
+            color: #ffffff;
+            box-shadow: 0 0 12px rgba(217, 0, 0, 0.4);
+        }
+
+        .btn-dc {
+            background: #5865F2;
+            color: #ffffff;
+            box-shadow: 0 0 12px rgba(88, 101, 242, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.15);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 45px 20px 20px;
+        }
+
+        .hero-avatar-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid var(--red-main);
+            box-shadow: 0 0 35px var(--red-glow);
+            object-fit: cover;
+            object-position: top center;
+            animation: pulseGlow 3s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 18px var(--red-main); }
+            100% { box-shadow: 0 0 40px var(--red-main), 0 0 12px #ffffff; }
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+            margin-top: 12px;
+        }
+
+        /* Container Layout */
+        .container {
+            max-width: 1050px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        /* Navigation Tabs System */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: #14141e;
+            border: 1px solid #282838;
+            color: #b5b5c8;
+            padding: 10px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.25s ease;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--red-main);
+            color: #ffffff;
+            border-color: var(--red-main);
+            box-shadow: 0 0 15px var(--red-glow);
+        }
+
+        /* Content Sections */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .sec-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--red-main);
+            margin: 30px 0 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card {
+            background: var(--card-glass);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .about-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #e2e2e8;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        /* Pricing Grid */
+        .prices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .price-card {
+            background: var(--card-glass);
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--red-main);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            transition: 0.3s;
+        }
+
+        .price-card:hover {
+            border-color: var(--red-main);
+            transform: translateY(-4px);
+            box-shadow: 0 0 25px var(--red-glow);
+        }
+
+        .price-card h3 {
+            color: var(--red-main);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #1c1c28;
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+
+        .price-row:last-of-type {
+            border-bottom: none;
+        }
+
+        .price-row .badge {
+            background: rgba(255, 0, 60, 0.15);
+            color: var(--red-main);
+            border: 1px solid var(--red-main);
+            padding: 3px 14px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .ticket-btn {
+            display: block;
+            margin-top: 20px;
+            padding: 11px;
+            text-align: center;
+            background: rgba(255, 0, 60, 0.12);
+            border: 1px solid var(--red-main);
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: 0.25s;
+        }
+
+        .ticket-btn:hover {
+            background: var(--red-main);
+            box-shadow: 0 0 15px var(--red-main);
+        }
+
+        /* Note Box */
+        .note-box {
+            background: rgba(255, 0, 60, 0.08);
+            border: 2px dashed var(--red-main);
+            border-radius: 12px;
+            padding: 22px;
+            margin-top: 35px;
+            text-align: center;
+        }
+
+        .note-box h4 {
+            color: var(--red-main);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .note-box p {
+            font-size: 1.1rem;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px;
+            margin-top: 60px;
+            background: #040406;
+            border-top: 1px solid var(--border-color);
+            color: #888899;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        footer span {
+            color: var(--red-main);
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Red Particles Canvas Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="brand-box">
+            <!-- DIRECT LOGO.JPG -->
+            <img src="logo.jpg" alt="ZerenXD Logo" class="brand-logo-img">
+            <div class="brand-name">ZERENXD <span>WEB</span></div>
+        </div>
+        <div class="social-btns">
+            <!-- YOUTUBE CHANNEL LINK -->
+            <a href="https://www.youtube.com/@zerenxd1" target="_blank" class="btn btn-yt"><i class="fab fa-youtube"></i> YouTube</a>
+            <!-- DISCORD SERVER LINK (NEW UPDATED LINK) -->
+            <a href="https://discord.gg/EfSAJEWwS6" target="_blank" class="btn btn-dc"><i class="fab fa-discord"></i> Discord</a>
+        </div>
+    </header>
+
+    <!-- Hero Header -->
+    <section class="hero">
+        <div>
+            <!-- DIRECT LOGO.JPG -->
+            <img src="logo.jpg" alt="ZerenXD Logo" class="hero-avatar-img">
+        </div>
+        <h1>Welcome to ZerenXD WEB</h1>
+    </section>
+
+    <div class="container">
+
+        <!-- Navigation Tabs -->
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="showTab('all-view')"><i class="fas fa-th-large"></i> All View</button>
+            <button class="tab-btn" onclick="showTab('about-view')"><i class="fas fa-user"></i> About ZerenXD</button>
+            <button class="tab-btn" onclick="showTab('pricing-view')"><i class="fas fa-tags"></i> Price List</button>
+        </div>
+
+        <!-- VIEW 1: ALL VIEW (DEFAULT) -->
+        <div id="all-view" class="tab-content active">
+            
+            <h2 class="sec-title"><i class="fas fa-user"></i> About ZerenXD</h2>
+            <div class="card">
+                <p class="about-text">
+                    <strong>ZerenXD is a professional Pack artist and content creator to packs samples To tell who made the pack cheap price affordable skin price</strong>
+                </p>
+            </div>
+
+            <h2 class="sec-title"><i class="fas fa-tags"></i> Price List</h2>
+            <div class="prices-grid">
+                <!-- Pack Price -->
+                <div class="price-card">
+                    <h3><i class="fas fa-box"></i> Pack Price</h3>
+                    <div class="price-row"><span>⛩️-Standard</span> <span class="badge">50</span></div>
+                    <div class="price-row"><span>⛩️-Non Animated</span> <span class="badge">100</span></div>
+                    <div class="price-row"><span>⛩️-Animated</span> <span class="badge">200</span></div>
+                    <div class="price-row"><span>⛩️-Ultimate</span> <span class="badge">500</span></div>
+                    <a href="https://discord.gg/EfSAJEWwS6" target="_blank" class="ticket-btn"><i class="fas fa-ticket-alt"></i> Make Ticket to Buy</a>
+                </div>
+                <!-- Skin Price -->
+                <div class="price-card">
+                    <h3><i class="fas fa-user-ninja"></i> Skin Price</h3>
+                    <div class="price-row"><span>⛩️ Edit</span> <span class="badge">10</span></div>
+                    <div class="price-row"><span>⛩️-Standard make</span> <span class="badge">50</span></div>
+                    <div class="price-row"><span>⛩️-Fully</span> <span class="badge">150</span></div>
+                    <a href="https://discord.gg/EfSAJEWwS6" target="_blank" class="ticket-btn"><i class="fas fa-ticket-alt"></i> Make Ticket to Buy</a>
+                </div>
+            </div>
+
+            <!-- Note -->
+            <div class="note-box">
+                <h4><i class="fas fa-info-circle"></i> Important Note</h4>
+                <p>Note - Payment in redeem code and If you want to get it done, Make a ticket. No BE/PE</p>
+            </div>
+
+        </div>
+
+        <!-- VIEW 2: ABOUT ONLY -->
+        <div id="about-view" class="tab-content">
+            <h2 class="sec-title"><i class="fas fa-user"></i> About ZerenXD</h2>
+            <div class="card">
+                <p class="about-text">
+                    <strong>ZerenXD is a professional Pack artist and content creator to packs samples To tell who made the pack cheap price affordable skin price</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- VIEW 3: PRICING ONLY -->
+        <div id="pricing-view" class="tab-content">
+            <h2 class="sec-title"><i class="fas fa-tags"></i> Price List</h2>
+            <div class="prices-grid">
+                <div class="price-card">
+                    <h3><i class="fas fa-box"></i> Pack Price</h3>
+                    <div class="price-row"><span>⛩️-Standard</span> <span class="badge">50</span></div>
+                    <div class="price-row"><span>⛩️-Non Animated</span> <span class="badge">100</span></div>
+                    <div class="price-row"><span>⛩️-Animated</span> <span class="badge">200</span></div>
+                    <div class="price-row"><span>⛩️-Ultimate</span> <span class="badge">500</span></div>
+                    <a href="https://discord.gg/EfSAJEWwS6" target="_blank" class="ticket-btn"><i class="fas fa-ticket-alt"></i> Make Ticket to Buy</a>
+                </div>
+                <div class="price-card">
+                    <h3><i class="fas fa-user-ninja"></i> Skin Price</h3>
+                    <div class="price-row"><span>⛩️ Edit</span> <span class="badge">10</span></div>
+                    <div class="price-row"><span>⛩️-Standard make</span> <span class="badge">50</span></div>
+                    <div class="price-row"><span>⛩️-Fully</span> <span class="badge">150</span></div>
+                    <a href="https://discord.gg/EfSAJEWwS6" target="_blank" class="ticket-btn"><i class="fas fa-ticket-alt"></i> Make Ticket to Buy</a>
+                </div>
+            </div>
+            <div class="note-box">
+                <h4><i class="fas fa-info-circle"></i> Important Note</h4>
+                <p>Note - Payment in redeem code and If you want to get it done, Make a ticket. No BE/PE</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 <span>ZERENXD WEB</span> | All Rights Reserved</p>
+    </footer>
+
+    <!-- Background Particles JS -->
+    <script>
+        const cvs = document.getElementById('bg-canvas');
+        const ctx = cvs.getContext('2d');
+        function resize() { cvs.width = window.innerWidth; cvs.height = window.innerHeight; }
+        resize();
+        window.addEventListener('resize', resize);
+        const pts = [];
+        for(let i=0; i<35; i++){
+            pts.push({ x: Math.random()*cvs.width, y: Math.random()*cvs.height, r: Math.random()*2.5+1, dx: (Math.random()-0.5)*0.6, dy: (Math.random()-0.5)*0.6, a: Math.random()*0.5+0.2 });
+        }
+        function drawPts(){
+            ctx.clearRect(0,0,cvs.width,cvs.height);
+            pts.forEach(p => {
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+                ctx.fillStyle = `rgba(255, 0, 60, ${p.a})`; ctx.fill();
+                p.x += p.dx; p.y += p.dy;
+                if(p.x<0 || p.x>cvs.width) p.dx*=-1;
+                if(p.y<0 || p.y>cvs.height) p.dy*=-1;
+            });
+            requestAnimationFrame(drawPts);
+        }
+        drawPts();
+    </script>
+
+    <!-- Tab Switching JS -->
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
